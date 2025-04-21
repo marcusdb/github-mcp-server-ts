@@ -7,14 +7,12 @@
   "homepage": "https://github.com/marcusdb/github-mcp-server-ts",
   "bugs": "https://github.com/marcusdb/github-mcp-server-ts/issues",
   "type": "module",
-  "bin": {
-    "github-mcp-server-ts": "dist/index.js"
-  },
+  "bin": "./dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc && shx chmod +x dist/*.js",
+    "build": "tsc && shx chmod +x dist/index.js",
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "start": "node dist/index.js"
