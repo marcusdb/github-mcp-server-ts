@@ -1,6 +1,6 @@
 # GitHub MCP Server
 
-**Deprecation Notice:** Development for this project has been moved to GitHub in the http://github.com/github/github-mcp-server repo.
+** Disclaimer!:** This is not the official github MCP server, for the official one go to http://github.com/github/github-mcp-server repo. This is typescript server with my own additions of what I thought was missing on the offical server and it's base code is from the servers directory of the modelcontextprotocol repository.
 
 ---
 
