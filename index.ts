@@ -124,7 +124,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       },
       {
         name: "list_issues",
-        description: "List issues in a GitHub repository with filtering options",
+        description: "List issues in a GitHub repository with filtering options: milestone string (If an integer is passed, it should refer to a milestone by its number field. If the string * is passed, issues with any milestone are accepted. If the string none is passed, issues without milestones are returned.) ,state string(Indicates the state of the issues to return.Default: open - Can be one of: open, closed, all) ,assignee string  (Can be the name of a user. Pass in none for issues with no assigned user, and * for issues assigned to any user.) ,type string (Can be the name of an issue type. If the string * is passed, issues with any type are accepted. If the string none is passed, issues without type are returned.) ,creator string (The user that created the issue.) ,mentioned string (A user that's mentioned in the issue.) ,labels (An array of label names.)",
         inputSchema: zodToJsonSchema(issues.ListIssuesOptionsSchema)
       },
       {

@@ -53,15 +53,20 @@ export const ReprioritizeSubIssueOptionsSchema = z.object({
 });
 
 export const ListIssuesOptionsSchema = z.object({
+  milestone: z.string().optional(),
+  state: z.enum(["open", "closed", "all"]).optional(),
+  assignee: z.string().optional(),
+  creator: z.string().optional(),
+  mentioned: z.string().optional(),
+  labels: z.array(z.string()).optional(),
+  type: z.string().optional(),
   owner: z.string(),
   repo: z.string(),
-  direction: z.enum(["asc", "desc"]).optional(),
-  labels: z.array(z.string()).optional(),
+  direction: z.enum(["asc", "desc"]).optional(),  
   page: z.number().optional(),
   per_page: z.number().optional(),
   since: z.string().optional(),
   sort: z.enum(["created", "updated", "comments"]).optional(),
-  state: z.enum(["open", "closed", "all"]).optional(),
 });
 
 export const ListSubIssuesOptionsSchema = z.object({
@@ -222,15 +227,36 @@ export async function listIssues(
   repo: string,
   options: Omit<z.infer<typeof ListIssuesOptionsSchema>, "owner" | "repo">
 ) {
+ 
   const urlParams: Record<string, string | undefined> = {
     direction: options.direction,
-    labels: options.labels?.join(","),
     page: options.page?.toString(),
     per_page: options.per_page?.toString(),
     since: options.since,
     sort: options.sort,
     state: options.state
   };
+  if (options.mentioned) {
+    urlParams.mentioned = options.mentioned;
+  }
+  if (options.milestone) {
+    urlParams.milestone = options.milestone;
+  }
+  if (options.state) {
+    urlParams.state = options.state;
+  }
+  if (options.assignee) {
+    urlParams.assignee = options.assignee;
+  }
+  if (options.creator) {
+    urlParams.creator = options.creator;
+  }
+  if (options.type) {
+    urlParams.type = options.type;
+  }
+  if(options.labels) {
+    urlParams.labels = options.labels.join(",");
+  }
 
   return githubRequest(
     buildUrl(`https://api.github.com/repos/${owner}/${repo}/issues`, urlParams)
